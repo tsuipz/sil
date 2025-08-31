@@ -97,21 +97,7 @@ export class LobbyComponent implements OnInit {
   user$ = this.store.select(AuthSelectors.selectUser);
   isAuthenticated$ = this.store.select(AuthSelectors.selectIsAuthenticated);
 
-  ngOnInit() {
-    // Check if user is authenticated
-    this.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
-      if (!isAuthenticated) {
-        this.router.navigate(['/']);
-      }
-    });
-
-    // Listen for sign out success
-    this.user$.subscribe((user: any) => {
-      if (!user) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
+  ngOnInit() {}
 
   signOut(): void {
     this.store.dispatch(AuthActions.signOut());
