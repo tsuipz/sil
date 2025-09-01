@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as AuthActions from '../store/auth/auth.actions';
@@ -55,6 +56,7 @@ import * as AuthSelectors from '../store/auth/auth.selectors';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private store = inject(Store);
+  private router = inject(Router);
 
   // Selectors
   error$ = this.store.select(AuthSelectors.selectAuthError);
@@ -63,7 +65,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private authSubscription: Subscription | undefined;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Navigate to lobby when authenticated
+    this.authSubscription = this.isAuthenticated$.subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this.router.navigate(['/lobby']);
+      }
+    });
+  }
 
   ngOnDestroy() {
     if (this.authSubscription) {
