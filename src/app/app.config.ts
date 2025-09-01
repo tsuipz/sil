@@ -18,10 +18,12 @@ import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { AuthEffects } from './store/auth/auth.effects';
 import { authReducer } from './store/auth/auth.reducer';
+import { RoomEffects } from './store/room/room.effects';
+import { roomReducer } from './store/room/room.reducer';
 
-const REDUCERS = { auth: authReducer };
+const REDUCERS = { auth: authReducer, room: roomReducer };
 
-const EFFECTS = [AuthEffects];
+const EFFECTS = [AuthEffects, RoomEffects];
 
 export const appConfig: ApplicationConfig = {
   providers: [
