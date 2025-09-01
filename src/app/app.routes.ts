@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: 'lobby',
     canActivate: [authGuard],
-    loadComponent: () => import('./lobby/lobby.component').then((m) => m.LobbyComponent),
+    loadComponent: () => import('./lobby/lobby-entry.component').then((m) => m.LobbyEntryComponent),
   },
   {
     path: 'room/:id',
